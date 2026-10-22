@@ -1,0 +1,224 @@
+{
+  "ver": 1,
+  "updated_at": "2026-10-20T17:13:55",
+  "updated_note": "出厂默认",
+  "warehouse_map": [
+    {
+      "prefix": "SAV102",
+      "whitelist": "SAV102",
+      "label": "SAV102白名单"
+    },
+    {
+      "prefix": "HOU",
+      "whitelist": "HOU2062",
+      "label": "HOU2062白名单"
+    },
+    {
+      "prefix": "NJ45",
+      "whitelist": "NJ45",
+      "label": "NJ45白名单"
+    },
+    {
+      "prefix": "NYC",
+      "whitelist": "NJ45",
+      "label": "NJ45白名单"
+    }
+  ],
+  "whitelists": {
+    "SAV102": [
+      "AUKEY",
+      "BANB",
+      "BCKJ",
+      "BXH",
+      "CMDD",
+      "CXKJ",
+      "DSDZ",
+      "DSKJ",
+      "FYYD",
+      "GDTY",
+      "GYKJ",
+      "HRT",
+      "HYMY",
+      "JSQZ",
+      "JYJS",
+      "LSM",
+      "LSMY",
+      "LYYT",
+      "MLMJ",
+      "MY_FW",
+      "MYZ",
+      "NBYS",
+      "SK",
+      "SZ TX",
+      "TFMY",
+      "YXKJ",
+      "ZHON"
+    ],
+    "HOU2062": [
+      "HL",
+      "PSJ",
+      "SLM",
+      "GYKJ",
+      "REKJ",
+      "FQYZ",
+      "YQN",
+      "ANL",
+      "LY",
+      "HYMY",
+      "FYYD",
+      "XG-HU",
+      "LSM",
+      "BCKJ",
+      "DSKJ",
+      "MY_FW",
+      "SZ TX",
+      "EPS",
+      "HYTX",
+      "JYHM",
+      "SK",
+      "ZIEL",
+      "MYZ",
+      "QF",
+      "AUKEY",
+      "NEXTFUR",
+      "JTKJ",
+      "ZHON",
+      "CXKJ",
+      "CPI",
+      "YFJ",
+      "LYYT",
+      "DSDZ",
+      "JSQZ",
+      "HOU2062"
+    ],
+    "NJ45": [
+      "BCKJ",
+      "CMDD",
+      "CXKJ",
+      "DSDZ",
+      "DSKJ",
+      "FYYD",
+      "FX",
+      "GC008",
+      "GYKJ",
+      "HGC",
+      "HL",
+      "HIGHSPEED",
+      "H921",
+      "HRT",
+      "HTDZ",
+      "HXK",
+      "HYMY",
+      "HYTX",
+      "JYJS",
+      "JYHM",
+      "JUDA",
+      "JTKJ",
+      "KDS",
+      "KHD",
+      "LKW",
+      "LSM",
+      "LSMY",
+      "LHYC",
+      "LYYT",
+      "MES",
+      "MY",
+      "MYZ",
+      "MY_FW",
+      "MKQ",
+      "MK",
+      "NBYS",
+      "PSJ",
+      "QF",
+      "RLKJ",
+      "SAMH",
+      "SPKJ",
+      "SZMYZ",
+      "SZLG",
+      "SHXL",
+      "SINO",
+      "TPZC",
+      "XTW",
+      "XG-HU",
+      "XJJJ",
+      "YZMY",
+      "YXKJ",
+      "SXKJ",
+      "YYKJ",
+      "ZHKJ",
+      "ZM",
+      "ZPT",
+      "ZY",
+      "ZP"
+    ]
+  },
+  "number_default": "0",
+  "ident_missing": "待确认",
+  "carrier_rules": {
+    "usps": {
+      "min": 1,
+      "fallback": "1"
+    }
+  },
+  "base_fields": [
+    {
+      "key": "today_orders",
+      "label": "订单情况 今日订单"
+    },
+    {
+      "key": "loaded",
+      "label": "已装车"
+    },
+    {
+      "key": "ltl",
+      "label": "大订单(LTL)"
+    },
+    {
+      "key": "returns",
+      "label": "退货情况"
+    },
+    {
+      "key": "appointment",
+      "label": "预约送仓"
+    },
+    {
+      "key": "unloading",
+      "label": "正在卸柜"
+    },
+    {
+      "key": "empty_container",
+      "label": "已空柜"
+    },
+    {
+      "key": "unload_status",
+      "label": "卸柜情况"
+    }
+  ],
+  "carriers": [
+    {
+      "key": "usps",
+      "label": "USPS来车"
+    },
+    {
+      "key": "ups",
+      "label": "UPS来车"
+    },
+    {
+      "key": "fedex",
+      "label": "FEDEX来车"
+    },
+    {
+      "key": "gofo",
+      "label": "GOFO来车"
+    }
+  ],
+  "extra_channel_suffix": "来车",
+  "prompts": {
+    "extract": "你是「自营出库日报」截图识别助手。用户发来一张仓库出库日报截图，图中包含若干个客户块（文字块或表格行）。请把每个客户块的结构化数据提取出来。\n\n【输出要求】\n- 只输出一个 JSON 对象，不要输出任何解释、markdown 代码块标记以外的内容。格式：\n{\"date\":\"10/12\",\"warehouse\":\"2062\",\"customers\":[{...}]}\n- customers 中每个对象字段：\n  customer(客户代码字符串), today_orders, loaded, ltl, returns, appointment,\n  unloading, empty_container, unload_status, usps, ups, fedex, gofo,\n  special(字符串), extra_channels(数组，元素 {\"name\":\"渠道名\",\"value\":\"值\"})\n- 所有数字类字段一律用字符串（如 \"3\"），不要用数字类型。\n\n【提取规则（必须严格遵守）】\n1. customer：客户代码逐字照抄，保留大小写与符号（如 MY_FW、SZ TX、XG-HU）。相似字符注意区分（O/0、1/l、5/S、8/B）。\n2. date：图中日报日期，统一转成 M/D 格式（如 10/12）；图中若是 2026-10-06 形式则转成 10/6；完全看不到填 \"{ident_missing}\"。\n3. warehouse：图中「仓库：」后的代码，逐字照抄（如 SAV102、2062、NJ45）；看不到填 \"{ident_missing}\"。\n4. 数字字段 today_orders/loaded/ltl/returns/appointment/unloading/empty_container/unload_status/ups/fedex/gofo：图中没有、看不清、或留空 → 一律填 \"{number_default}\"，不要填\"{ident_missing}\"，不要编造。ltl 若是「3车」这种写法，原样保留字符串。\n5. {usps_rule}\n6. special（特殊情况）：图中「特殊情况：」/「Missing」/「异常」下的内容逐字照抄（订单号、sku、系统库存说明等），多行用 \\n 连接；表格中 Missing/异常 列非 0 的，记「Missing：N」或「异常：N」；没有内容填空字符串 \"\"。\n7. extra_channels：除 USPS/UPS/FEDEX/GOFO 之外出现的来车渠道（如 CBT、SPEEDX、SWIFTX、DPD 等），逐个提取，渠道名照抄。\n8. 状态为「无订单」或今日订单为 0 的客户块：直接跳过，不要输出。\n9. 若图中有仓库级「汇总区」的来车数（FEDEX来车/UPS来车/GOFO来车/CBT来车等），该数值适用于图中每个客户块，逐块照填。\n10. 图中没有的信息不要臆测；宁可填规则默认值，也不要编造数字。\n11. 一张图可能有多个客户块（同一天），全部输出，一个客户块一个对象，顺序与图中一致。",
+    "repair": "上一次你的输出不是合法 JSON。请只输出修正后的 JSON 对象本身（不要任何解释、不要 markdown 代码块），确保：\n- 是单个完整 JSON 对象，双引号，无尾逗号\n- 结构与字段名完全符合要求\n上次的输出内容如下，请基于它修正：\n"
+  },
+  "output": {
+    "file_pattern": "{date} {warehouse}出库日报.docx"
+  },
+  "sig": "41bcd6276841e334722572a4750008d2e93419d702326371aa7fa9d632ae7c9141e5db39fddaa9700d1a055cad15bdad44e8e857009aee27b5acb74a3a0ee802"
+}
